@@ -11,6 +11,7 @@ import com.hiber.hibernet.maven.demo1.model.CompositeKey;
 import com.hiber.hibernet.maven.demo1.model.HelloWorld;
 import com.hiber.hibernet.maven.demo1.model.UserProfile;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -48,7 +49,7 @@ public class Driver {
                     phone = sc.nextLong();
                     System.out.println("Enter email:");
                     email = sc.next();
-                    if (name == null || email == null || phone == null) {
+                    if (Objects.isNull(name) || Objects.isNull(phone)|| Objects.isNull(email)) {
                         System.out.println("Provide valid details..");
                     } else {
                         CompositeKey ck = new CompositeKey(name,phone);
@@ -85,7 +86,7 @@ public class Driver {
                     String msg = new String();
                     System.out.println("Enter message:");
                     msg = sc.next();
-                    if (msg == null) {
+                    if (Objects.isNull(msg)) {
                         System.out.println("Provide valid message..");
                     } else {
                         HelloWorld helloWorld = new HelloWorld(msg);
