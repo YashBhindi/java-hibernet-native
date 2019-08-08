@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.hiber.hibernet.maven.demo1.driver;
+
+import com.hiber.hibernet.maven.demo1.dao.HelloWorldDao;
+import com.hiber.hibernet.maven.demo1.model.HelloWorld;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ *
+ * @author yash
+ */
+public class Driver {
+
+    public static void main(String[] args) {
+        HelloWorldDao helloWorldDao = new HelloWorldDao();
+        Scanner sc = new Scanner(System.in);
+        getInputs(helloWorldDao, sc);
+    }
+
+    public static void getInputs(HelloWorldDao helloWorldDao, Scanner sc) {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter the choice:");
+            System.out.println("1 to add message:");
+            System.out.println("2 to real all message:");
+            System.out.println("3 to exit:");
+
+            int n = sc.nextInt();
+            switch (n) {
+                case 1:
+                    String msg = new String();
+                    System.out.println("Enter message:");
+                    msg = sc.next();
+                    if (msg == null) {
+                        System.out.println("Provide valid message..");
+                    } else {
+                        HelloWorld helloWorld = new HelloWorld(msg);
+                        helloWorldDao.saveMessage(helloWorld);
+                        System.out.println("Message added..");
+                    }
+                    break;
+                case 2:
+                    List<HelloWorld> messages = helloWorldDao.getMessage();
+                    messages.forEach(s -> System.out.println(s.getMessage()));
+                    break;
+                case 3:
+                    flag = false;
+                    break;
+            }
+
+        }
+    }
+
+}
